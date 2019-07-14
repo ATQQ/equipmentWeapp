@@ -3,6 +3,7 @@
 		<image class="logo" src="/static/logo.png"></image>
 		<view>
 			<text class="title">{{title}}</text>
+			<van-button type="primary">按钮</van-button>
 		</view>
 	</view>
 </template>
@@ -11,7 +12,7 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello123'
+				title: 'Hello123是是'
 			}
 		},
 		onLoad() {
