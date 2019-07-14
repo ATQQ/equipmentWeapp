@@ -1,18 +1,29 @@
 {
-	"pages": [ 
+	"pages": [
+		{
+		    "path" : "pages/login/login",
+		    "style" : {
+				"navigationBarTitleText": "登录",
+				"usingComponents":{
+					"van-field": "/wxcomponents/vant/field/index",
+					"van-button": "/wxcomponents/vant/button/index"
+				}
+			}
+		},
 		{
 			"path": "pages/index/index",
 			"style": {
 				"usingComponents":{
 					"van-button": "/wxcomponents/vant/button/index"
 				},
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "SWPU实验室设备预约系统"
 			}
 		}
-	],
+	    
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "SWPU实验室设备预约系统",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}
