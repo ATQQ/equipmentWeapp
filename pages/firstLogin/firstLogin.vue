@@ -6,19 +6,19 @@
 		<!-- 标题 -->
 		<view class="title">
 			<text >
-				实验室设备预约系统
+				首次登录,请修改密码
 			</text>
 		</view>
 		<!-- 输入部分 -->
 		<view class="field">
 			<van-cell-group>
-				<van-field @blur="inputUsername" :value="username" label="账号" :clearable="clearable"  left-icon="user-o" type="number" placeholder="请输入账号" maxlength="12" />
-				<van-field @blur="inputPassword" :value="password" label="密码" :clearable="clearable" left-icon="lock" type="password" placeholder="请输入密码" maxlength="16"/>
+				<van-field @blur="inputPwd1" :value="pwd1" label="密码" :clearable="clearable"  left-icon="lock" type="password" placeholder="请输入密码" maxlength="16" />
+				<van-field @blur="inputPwd2" :value="pwd2" label="密码" :clearable="clearable" left-icon="lock" type="password" placeholder="请再次输入密码" maxlength="16"/>
 			</van-cell-group>
 		</view>
 		<!-- 按钮区域 -->
 		<view class="btnArea">
-			<van-button @click="login" type="info" round="true" size="large">登录</van-button>
+			<van-button @click="sureReset" type="info" round="true" size="large">确认重置</van-button>
 		</view>
 		<!-- 弹出提示框 -->
 		<van-toast id="van-toast"/>
@@ -32,13 +32,13 @@
 	export default {
 		data() {
 			return {
-				username:"",
-				password:"",
+				pwd1:"",
+				pwd2:"",
 				clearable:true
 			};
 		},
 		methods:{
-			login:function(){
+			sureReset:function(){
 				// Toast({
 				// 	type:"success",
 				// 	message:"登录成功",
@@ -49,14 +49,12 @@
 					message:"登录失败",
 					duration:1000
 				});
-				// console.log(this.username);
-				// console.log(this.password);
 			},
-			inputPassword:function(e){
-				this.password=e.detail.value;
+			inputPwd1:function(e){
+				this.pwd1=e.detail.value;
 			},
-			inputUsername:function(e){
-				this.username=e.detail.value;
+			inputPwd2:function(e){
+				this.pwd2=e.detail.value;
 			}
 		}
 	}

@@ -1,12 +1,35 @@
 {
 	"pages": [
 		{
+		    "path" : "pages/bindPhone/bindPhone",
+		    "style" : {
+				"navigationBarTitleText": "绑定手机号",
+				"usingComponents":{
+					"van-field": "/wxcomponents/vant/field/index",
+					"van-button": "/wxcomponents/vant/button/index",
+					"van-toast": "/wxcomponents/vant/toast/index"
+				}
+			}
+		},
+		{
+		    "path" : "pages/firstLogin/firstLogin",
+		    "style" : {
+				"navigationBarTitleText": "重置密码",
+				"usingComponents":{
+					"van-field": "/wxcomponents/vant/field/index",
+					"van-button": "/wxcomponents/vant/button/index",
+					"van-toast": "/wxcomponents/vant/toast/index"
+				}
+			}
+		},
+		{
 		    "path" : "pages/login/login",
 		    "style" : {
 				"navigationBarTitleText": "登录",
 				"usingComponents":{
 					"van-field": "/wxcomponents/vant/field/index",
-					"van-button": "/wxcomponents/vant/button/index"
+					"van-button": "/wxcomponents/vant/button/index",
+					"van-toast": "/wxcomponents/vant/toast/index"
 				}
 			}
 		},
@@ -19,7 +42,6 @@
 				"navigationBarTitleText": "SWPU实验室设备预约系统"
 			}
 		}
-	    
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
