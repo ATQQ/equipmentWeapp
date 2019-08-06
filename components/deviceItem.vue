@@ -4,7 +4,7 @@
 		<view class="device-header">
 			<!-- 图片 -->
 			<view class="device-img">
-				<image src="/static/deviceHead.png" mode="scaleToFill"></image>
+				<image :src="device.images|showImage|getImage" mode="scaleToFill"></image>
 			</view>
 			<view class="device-title">
 				<text class="deviceName">{{device.eqName}}</text>
@@ -16,7 +16,7 @@
 			<view class="top">
 				<view class="tips">
 					<text class="tip">
-						{{device.categoryId}}
+						{{device.categoryId|getCategory}}
 					</text>
 				</view>
 				<view class="checkBtn">
@@ -26,7 +26,7 @@
 			<view class="bottom">
 				<text>借出次数: {{device.numberUse}}</text>
 				<text>可借: {{device.amount}}</text>
-				<text>图片: {{JSON.parse(device.images).length}}</text>
+				<text>图片: {{device.images|imageCount}}</text>
 			</view>
 		</view>
 	</view>
@@ -55,13 +55,31 @@
 				eqDate:Number
 			}
 		},
-		components:{
-		},
 		filters:{
-			
+			// 展示的图片名称
+			showImage:function(v){
+				const imgs=JSON.parse(v);
+				return imgs.length?imgs[0]:'demo';
+			},
+			//获取要展示的图片
+			getImage:function(v){
+				if(v==='demo'){
+					return '/static/deviceHead.png'
+				}
+				return getApp().globalData.baseUrl+'file/image?picName='+v;
+			},
+			// 图片个数
+			imageCount:function(v){
+				return JSON.parse(v).length;
+			},
+			// 获取分类名称
+			getCategory:function(v){
+				return (getApp().globalData.category.get(v));
+			}
 		},
 		methods:{
 			checkDetail:function(id){
+				// 物品详情页面
 				console.log(id);
 			}
 		}

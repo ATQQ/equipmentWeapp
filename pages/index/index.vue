@@ -23,13 +23,21 @@
 			</view>
 		</view>
 
-		<!-- 设备 -->
+		<!-- 分割文字 -->
+		<view class="splitWords">
+			<text>{{splitWords}}</text>
+		</view>
+		<!-- 设备列表 -->
 		<view class="deviceArea">
-			<deviceItem :device="device"></deviceItem>
+			<deviceItem class='deviceItem' v-for="(device,index) in devices" :key="index" :device="device"></deviceItem>
+		</view>
+		
+		<!-- 换一组 -->
+		<view class="changeGroup">
+			<text @click="changeDeviceGroup()">点击换一组</text>
 		</view>
 		<!-- 弹出提示框 -->
 		<van-toast id="van-toast" />
-		
 
 	</view>
 </template>
@@ -37,24 +45,19 @@
 <script>
 	// 引入toast组件
 	import Toast from 'wxcomponents/vant/toast/toast';
-	import {deviceItem} from '../../components/deviceItem.vue'
+	// 设备展示组件
+	import {
+		deviceItem
+	} from '../../components/deviceItem.vue'
+
+
 	export default {
 		data() {
 			return {
+				count:4,//首页展示设备个数
+				splitWords:'- 设备 -',
+				devices:[],
 				title: "实验室设备预约系统",
-				device:{
-					eqId:1,
-					eqName:"名称",
-					eqNumber:"ddffsfsf",
-					categoryId:3,
-					images:'[]',
-					introduce:"dsda",
-					amount:12,
-					loan:3,
-					numberUse:555,
-					eqAdmin:"admin",
-					eqDate:(new Date())-0
-				},
 				imgs: [
 					"/static/img/p1.jpg",
 					"/static/img/p2.jpg",
@@ -84,20 +87,21 @@
 				]
 			}
 		},
-		onLoad() {
-
-		},
 		methods: {
+			changeDeviceGroup:function(){
+				this.devices=this.getRandomDevice(this.count);
+			},
+			// 导航栏
 			redirect: function(e) {
 				const key = e.currentTarget.dataset.key;
 				switch (key) {
 					case 'book':
-					uni.navigateTo({
-						url: '../book/book',
-						success: res => {},
-						fail: () => {},
-						complete: () => {}
-					});
+						uni.navigateTo({
+							url: '../book/book',
+							success: res => {},
+							fail: () => {},
+							complete: () => {}
+						});
 						break;
 					case 'type':
 						uni.navigateTo({
@@ -117,20 +121,48 @@
 					default:
 						break;
 				}
+			},
+			/**
+			 * 随机加载{count}个设备信息
+			 * @param {Number} count
+			 */
+			getRandomDevice:function(count){
+				let originDevices=getApp().globalData.devices;
+				originDevices=originDevices.shuffle();
+				return originDevices.length>=count?originDevices.slice(0,count):originDevices;
 			}
 		},
-		components:{
+		components: {
 			deviceItem
+		},
+		onLoad:function(){
+			// 加载设备列表
+			this.devices=this.getRandomDevice(this.count);
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	.deviceArea{
+	.splitWords,.changeGroup{
+		text-align: center;
+		font-size: 0.7rem;
+		color: #5e6265;
+	}
+	.changeGroup{
+		padding-bottom: 0.5rem;
+	}
+	
+	.deviceArea {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		
+		.deviceItem{
+			margin-top: 0.6rem;
+		}
+		padding-bottom: 1rem;
 	}
+
 	.index {
 		background-color: #f0f3f6;
 	}
