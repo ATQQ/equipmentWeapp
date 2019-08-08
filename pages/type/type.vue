@@ -8,6 +8,11 @@
 		<view class="deviceArea">
 			<deviceItem class='deviceItem' v-for="(device,index) in devices" :key="index" :device="device"></deviceItem>
 		</view>
+
+		<!-- 空内容提示 -->
+		<view class="emptyTips" v-show="isEmpty">
+			<text>空空如也,什么也没有哟</text>
+		</view>
 	</view>
 </template>
 
@@ -22,7 +27,8 @@
 			return {
 				active: 0, //默认选中第一个分类
 				categorys: [], //分类
-				devices: []
+				devices: [],
+				isEmpty: false
 			};
 		},
 		methods: {
@@ -58,7 +64,8 @@
 				this.devices = orignDevices.filter((v) => {
 					return v.categoryId === category;
 				})
-				// console.log(this.devices);
+				// 是否显示空目录提示
+				this.isEmpty = this.devices ? this.devices.length === 0 : true;
 			}
 		},
 		onLoad: function() {
@@ -72,6 +79,15 @@
 </script>
 
 <style lang="less">
+	.emptyTips {
+		font-size: 0.8rem;
+		text-align: center;
+		position: absolute;
+		width: 100%;
+		top: 40%;
+		color: rgba(0, 0, 0, 0.5);
+	}
+
 	.deviceArea {
 		display: flex;
 		flex-direction: column;
