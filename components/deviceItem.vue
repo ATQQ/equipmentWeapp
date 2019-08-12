@@ -79,8 +79,14 @@
 		},
 		methods:{
 			checkDetail:function(id){
-				// 物品详情页面
-				console.log(id);
+				//跳转物品详情页面
+				getApp().globalData.detailId=id;
+				uni.navigateTo({
+					url: '../deviceDetail/deviceDetail',
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
 			}
 		}
 	}

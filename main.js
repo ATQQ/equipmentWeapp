@@ -15,7 +15,6 @@ Array.prototype.shuffle = function() {
   }
   return this;
 }
-
 const app = new Vue({
     ...App
 })

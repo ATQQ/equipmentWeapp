@@ -1,15 +1,5 @@
 {
 	"pages": [{
-			"path": "pages/deviceDetail/deviceDetail",
-			"style": {
-				"navigationBarTitleText": "设备详情",
-				"usingComponents":{
-					"van-icon": "/wxcomponents/vant/icon/index",
-					"van-button": "/wxcomponents/vant/button/index"
-				}
-			}
-		},
-		{
 			"path": "pages/index/index",
 			"style": {
 				"usingComponents": {
@@ -17,6 +7,16 @@
 					"van-toast": "/wxcomponents/vant/toast/index"
 				},
 				"navigationBarTitleText": "SWPU实验室设备预约系统"
+			}
+		},
+		{
+			"path": "pages/deviceDetail/deviceDetail",
+			"style": {
+				"navigationBarTitleText": "设备详情",
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/icon/index",
+					"van-button": "/wxcomponents/vant/button/index"
+				}
 			}
 		},
 		{
@@ -101,6 +101,9 @@
 		"navigationBarTextStyle": "#fff",
 		"navigationBarTitleText": "SWPU实验室设备预约系统",
 		"navigationBarBackgroundColor": "#1989fa",
-		"backgroundColor": "#f0f3f6"
+		"backgroundColor": "#f0f3f6",
+		"usingComponents":{
+			"van-toast": "/wxcomponents/vant/toast/index"
+		}
 	}
 }

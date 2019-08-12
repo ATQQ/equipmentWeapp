@@ -2,11 +2,12 @@
 	
 	export default {
 		globalData: {  
-            text: 'text',
-			category:null,
-			devices:null,
-			admin:'admin',
-			baseUrl:null
+            text: 'text',//测试数据
+			category:null,//分类map
+			devices:null,//设备Array
+			admin:'admin',//管理员账号
+			baseUrl:null,//服务器路径
+			detailId:-1
         },
 		methods:{
 			getCategory:function(){
@@ -115,4 +116,9 @@
 <style>
 	@import "/wxcomponents/vant/common/index.wxss";
 	/*每个页面公共css */
+	::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+		color: transparent;
+	}
 </style>

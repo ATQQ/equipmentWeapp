@@ -3,33 +3,34 @@
 		<!-- 设备图册区域 -->
 		<view class="device-images">
 			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
-				<swiper-item>
+				<swiper-item v-for="(imgName,index) in ((!device.images||JSON.parse(device.images).length===0)?['demo']:JSON.parse(device.images))"
+				 :key='index'>
+					<view class="swiper-item">
+						<image :src="imgName|getImage" mode="scaleToFill"></image>
+					</view>
+				</swiper-item>
+				<!-- <swiper-item>
 					<view class="swiper-item">
 						<image src="/static/img/p3.jpg" mode="scaleToFill"></image>
 					</view>
-				</swiper-item>
-				<swiper-item>
-					<view class="swiper-item">
-						<image src="/static/img/p3.jpg" mode="scaleToFill"></image>
-					</view>
-				</swiper-item>
+				</swiper-item> -->
 			</swiper>
 		</view>
 
 		<!-- 设备标题区域 -->
 		<view class="deviceTitle">
-			<text>设备名称颠三倒四第三设备名称颠三倒四第三方付滴滴滴方付滴滴滴</text>
+			<text>{{device.eqName}}</text>
 		</view>
 
 		<!-- 设备预约量/余量信息 -->
 		<view class="deviceCountMsg">
 			<view class="msgItem">
 				<text class="title">已成功预约人次: </text>
-				<text class="number">666</text>
+				<text class="number">{{device.numberUse}}</text>
 			</view>
 			<view class="msgItem">
 				<text class="title">设备余量: </text>
-				<text class="number">12</text>
+				<text class="number">{{device.amount}}</text>
 			</view>
 		</view>
 
@@ -39,17 +40,17 @@
 				<van-icon class="icon" name="send-gift" /><text>设备编号</text>
 			</view>
 			<view class="body">
-				<text>ddadddd</text>
+				<text>{{device.eqNumber}}</text>
 			</view>
 		</view>
-		
+
 		<!-- 设备介绍卡片 -->
 		<view class="introduceCard">
 			<view class="title">
 				<van-icon class="icon" name="comment" /><text>设备介绍</text>
 			</view>
 			<view class="body">
-				<text>正文介绍</text>
+				<text>{{device.introduce}}</text>
 			</view>
 		</view>
 
@@ -66,26 +67,87 @@
 		<!-- 底部导航栏 -->
 		<view class="botNav">
 			<view class="left">
-				<view class="home">
+				<view class="home" @tap="redirectToHome">
 					<van-icon name="wap-home"></van-icon>
 					<text>首页</text>
 				</view>
 			</view>
 			<view class="right">
 				<view class="book">
-					<van-button type="info" size="large">立即预约</van-button>
+					<van-button type="info" size="large" @click="sureBook">立即预约</van-button>
 				</view>
 			</view>
 		</view>
+
+		<!-- 弹出提示框 -->
+		<van-toast id="van-toast" />
 	</view>
 </template>
 
 <script>
+	// 引入toast组件
+	import Toast from 'wxcomponents/vant/toast/toast';
 	export default {
 		data() {
 			return {
-
+				device: {
+					eqId: 1,
+					eqName: "名称",
+					eqNumber: "ddffsfsf",
+					categoryId: 3,
+					images: '[]',
+					introduce: "dsda",
+					amount: 12,
+					loan: 3,
+					numberUse: 555,
+					eqAdmin: "admin",
+					eqDate: (new Date()) - 0
+				}
 			};
+		},
+		methods: {
+			/**
+			 * 确认预约设备
+			 */
+			sureBook: function() {
+				if (this.device.amount === 0) {
+					Toast({
+						type: "fail",
+						message: "抱歉尚无剩余库存,请换个时间再来看看",
+						duration: 2000
+					});
+				} else {
+					console.log(this.device.eqId);
+				}
+			},
+			/**
+			 * 回到首页
+			 */
+			redirectToHome:function(){
+				uni.switchTab({
+					url:'../index/index'
+				})
+			}
+		},
+		filters: {
+			//获取要展示的图片
+			getImage: function(v) {
+				if (v === 'demo') {
+					return '/static/deviceHead.png'
+				}
+				return getApp().globalData.baseUrl + 'file/image?picName=' + v;
+			}
+		},
+		onLoad: function() {
+			const eqId = getApp().globalData.detailId;
+			const devices = getApp().globalData.devices;
+			console.log(eqId);
+			if (eqId !== -1) {
+				const device = devices.filter(v => {
+					return v.eqId === eqId;
+				})
+				this.device = device[0];
+			}
 		}
 	}
 </script>
