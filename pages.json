@@ -8,7 +8,22 @@
 				},
 				"navigationBarTitleText": "SWPU实验室设备预约系统"
 			}
+		}, {
+			"path": "pages/confirmOrder/confirmOrder",
+			"style": {
+				"usingComponents": {
+					"van-submit-bar": "/wxcomponents/vant/submit-bar/index",
+					"van-card": "/wxcomponents/vant/card/index",
+					"van-button": "/wxcomponents/vant/button/index",
+					"van-stepper": "/wxcomponents/vant/stepper/index",
+					"van-picker": "/wxcomponents/vant/picker/index",
+					"van-field": "/wxcomponents/vant/field/index",
+					"van-cell": "/wxcomponents/vant/cell/index",
+					"van-cell-group": "/wxcomponents/vant/cell-group/index"
+				}
+			}
 		},
+
 		{
 			"path": "pages/deviceDetail/deviceDetail",
 			"style": {
@@ -73,6 +88,7 @@
 				}
 			}
 		}
+
 	],
 	"tabBar": {
 		"color": "#000",
@@ -102,7 +118,7 @@
 		"navigationBarTitleText": "SWPU实验室设备预约系统",
 		"navigationBarBackgroundColor": "#1989fa",
 		"backgroundColor": "#f0f3f6",
-		"usingComponents":{
+		"usingComponents": {
 			"van-toast": "/wxcomponents/vant/toast/index"
 		}
 	}

@@ -117,7 +117,12 @@
 						duration: 2000
 					});
 				} else {
-					console.log(this.device.eqId);
+					uni.navigateTo({
+						url: `../confirmOrder/confirmOrder?eqId=${this.device.eqId}`,
+						success: res => {},
+						fail: () => {},
+						complete: () => {}
+					});
 				}
 			},
 			/**
