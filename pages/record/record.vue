@@ -10,6 +10,17 @@
 			return {
 				
 			};
+		},
+		onLoad:function(){
+			const token=getApp().globalData.eqToken;
+			if(!token){
+				uni.redirectTo({
+					url: '../login/login',
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+			}
 		}
 	}
 </script>

@@ -16,7 +16,8 @@
 				userNumber: "201731061423",
 				userPower: 0
 			},
-			eqToken: 'DooyMDNDoyMDE3MzEwNjE0MjM6MTU2NTY5OTE5Mjg4NDow'
+			eqToken: null
+			// eqToken: 'DooyMDNDoyMDE3MzEwNjE0MjM6MTU2NTY5OTE5Mjg4NDow'
 		},
 		methods: {
 			getCategory: function() {

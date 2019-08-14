@@ -127,7 +127,7 @@
 			 * @param {Number} count
 			 */
 			getRandomDevice:function(count){
-				let originDevices=getApp().globalData.devices;
+				let originDevices=[...getApp().globalData.devices];
 				originDevices=originDevices.shuffle();
 				return originDevices.length>=count?originDevices.slice(0,count):originDevices;
 			}

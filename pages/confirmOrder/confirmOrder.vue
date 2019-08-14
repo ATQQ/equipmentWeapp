@@ -109,12 +109,9 @@
 			 */
 			getDevice: function(eqId) {
 				const devices = getApp().globalData.devices;
-				if (eqId !== -1) {
-					const device = devices.filter(v => {
-						return v.eqId === eqId;
-					})
-					this.device = device[0];
-				}
+				this.device = devices.find(function(item){
+					return item.eqId===eqId;
+				})
 			},
 			/**
 			 * 获取设备当前设备的预约数量

@@ -146,13 +146,9 @@
 		onLoad: function() {
 			const eqId = getApp().globalData.detailId;
 			const devices = getApp().globalData.devices;
-			console.log(eqId);
-			if (eqId !== -1) {
-				const device = devices.filter(v => {
-					return v.eqId === eqId;
-				})
-				this.device = device[0];
-			}
+			this.device=devices.find(function(item){
+				return item.eqId===eqId;
+			})
 		}
 	}
 </script>
