@@ -63,7 +63,9 @@
 				"usingComponents": {
 					"van-field": "/wxcomponents/vant/field/index",
 					"van-button": "/wxcomponents/vant/button/index",
-					"van-toast": "/wxcomponents/vant/toast/index"
+					"van-toast": "/wxcomponents/vant/toast/index",
+					"van-checkbox": "/wxcomponents/vant/checkbox/index",
+					"van-checkbox-group": "/wxcomponents/vant/checkbox-group/index"
 				}
 			}
 		}, {

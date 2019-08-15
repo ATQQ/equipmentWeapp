@@ -20,7 +20,12 @@
 		</view>
 		<!-- 按钮区域 -->
 		<view class="btnArea">
-			<view>
+			<view class="rememberBox">
+				<van-checkbox :value="rememberPwd" @change="changeRemember">
+					记住密码?
+				</van-checkbox>
+			</view>
+			<view class="btn-item">
 				<van-button @click="login" type="info" round="true" size="large">登录</van-button>
 			</view>
 			<view class="btn-item">
@@ -40,17 +45,53 @@
 	export default {
 		data() {
 			return {
+				rememberPwd: false,
 				username: "",
 				password: "",
 				clearable: true
 			};
 		},
 		methods: {
+			changeRemember: function(e) {
+				this.rememberPwd = e.detail;
+			},
+			/**
+			 * 存储用户信息
+			 */
+			setInfo: function() {
+				let copyData ={};
+				Object.assign(copyData,this.$data);
+				if (!this.rememberPwd) {
+					copyData.password = '';
+				}
+				uni.setStorageSync("userInfo", JSON.stringify(copyData));
+			},
+			/**
+			 * 取出用户信息
+			 */
+			getInfo: function() {
+				const userInfo = uni.getStorageSync("userInfo");
+				if (userInfo) {
+					Object.assign(this.$data,JSON.parse(userInfo));
+				}
+			},
+			/**
+			 * 登录
+			 */
 			login: function() {
-				Toast.setDefaultOptions({
-					duration: 2000
-				})
+				if(this.username.length!==12){
+					Toast.fail("账号格式不正确");
+					return;
+				}
+				if(this.password.length<6||this.password.length>16){
+					Toast.fail("密码格式不正确(6-16位)");
+					return;
+				}
+				//存储本地信息
+				this.setInfo();
+				
 				var that = this;
+				//登陆请求
 				uni.request({
 					url: that.$baseUrl + 'user/login',
 					method: 'POST',
@@ -62,12 +103,25 @@
 						res = res.data;
 						switch (res.code) {
 							case 200:
-								const power = res.data.userPower;
-								const firstLogin = res.data.firstLogin;
+								//解构取值
+								const {
+									userPower: power,
+									firstLogin,
+									token
+								} = res.data;
+
 								if (power !== 0) {
 									Toast.fail("没有权限")
 								} else {
 									Toast.success("登录成功");
+								
+
+									//保存token
+									getApp().globalData.eqToken = token;
+									//加载用户数据
+									that.getUserInfo(that.username, token);
+
+									//判断是否首次登陆给予重置密码权限
 									if (firstLogin) {
 										uni.navigateTo({
 											url: '../firstLogin/firstLogin',
@@ -103,12 +157,43 @@
 					url: '../index/index'
 				})
 			},
+			/**
+			 * 获取个人信息
+			 * @param {Number} userNumber
+			 * @param {String} token 
+			 */
+			getUserInfo: function(userNumber, token) {
+				console.log("success");
+				let that = this;
+				uni.request({
+					url: that.$baseUrl + `user/user/${userNumber}`,
+					method: 'GET',
+					header: {
+						'eq-token': token
+					},
+					success: res => {
+						res = res.data;
+						if (res.code === 200) {
+							getApp().globalData.userInfo = res.data.userInfo;
+						} else {
+							Toast.fail("个人信息获取失败");
+						}
+					}
+				});
+			},
 			inputPassword: function(e) {
 				this.password = e.detail.value;
 			},
 			inputUsername: function(e) {
 				this.username = e.detail.value;
 			}
+		},
+		onLoad:function(){
+			Toast.setDefaultOptions({
+				duration: 2000
+			})
+			
+			this.getInfo();
 		}
 	}
 </script>
@@ -129,11 +214,16 @@
 	}
 
 	.btnArea {
-		margin-top: 50upx;
 		padding: 15px;
 
 		.btn-item {
 			padding-top: 0.8rem;
+		}
+
+		.rememberBox {
+			display: flex;
+			justify-content: center;
+			font-size: 0.8rem;
 		}
 	}
 </style>
