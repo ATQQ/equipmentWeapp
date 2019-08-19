@@ -110,6 +110,52 @@
 			 * 确认预约设备
 			 */
 			sureBook: function() {
+				/**
+				 * 未登录
+				 */
+				if (!getApp().$vm.$options.isLogin()) {
+					uni.showModal({
+						title: '尚未登录,不能进行预约操作',
+						content: '是否现在去登录',
+						cancelText: '否',
+						confirmText: '是',
+						confirmColor: '#1989FA',
+						success: function(res) {
+							if (res.confirm) {
+								uni.redirectTo({
+									url: '../login/login'
+								})
+							} else if (res.cancel) {
+								console.log('用户点击取消去登录');
+							}
+						}
+					});
+					return;
+				}
+
+				/**
+				 * 未绑定手机
+				 */
+				if (!getApp().$vm.$options.isBindPhone()) {
+					uni.showModal({
+						title: '尚未绑定手机,不能进行预约操作',
+						content: '是否现在去绑定',
+						cancelText: '否',
+						confirmText: '是',
+						confirmColor: '#1989FA',
+						success: function(res) {
+							if (res.confirm) {
+								uni.redirectTo({
+									url: '../bindPhone/bindPhone'
+								})
+							} else if (res.cancel) {
+								console.log('用户点击取消绑定手机操作');
+							}
+						}
+					});
+					return;
+				}
+
 				if (this.device.amount === 0) {
 					Toast({
 						type: "fail",
@@ -128,9 +174,9 @@
 			/**
 			 * 回到首页
 			 */
-			redirectToHome:function(){
+			redirectToHome: function() {
 				uni.switchTab({
-					url:'../index/index'
+					url: '../index/index'
 				})
 			}
 		},
@@ -146,8 +192,8 @@
 		onLoad: function() {
 			const eqId = getApp().globalData.detailId;
 			const devices = getApp().globalData.devices;
-			this.device=devices.find(function(item){
-				return item.eqId===eqId;
+			this.device = devices.find(function(item) {
+				return item.eqId === eqId;
 			})
 		}
 	}

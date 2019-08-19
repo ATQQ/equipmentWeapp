@@ -12,13 +12,12 @@
 			};
 		},
 		onLoad:function(){
-			const token=getApp().globalData.eqToken;
-			if(!token){
+			/**
+			 * 未登录
+			 */
+			if(!getApp().$vm.$options.isLogin()){
 				uni.redirectTo({
-					url: '../login/login',
-					success: res => {},
-					fail: () => {},
-					complete: () => {}
+					url: '../login/login'
 				});
 			}
 		}

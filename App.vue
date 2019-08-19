@@ -10,7 +10,7 @@
 			userInfo: {
 				userProfession: "舞蹈",
 				userAcademy: "艺术院",
-				userPhone: "15196520474",
+				userPhone: null,
 				deposit: 0,
 				userName: "小天才",
 				userNumber: "201731061423",
@@ -19,7 +19,39 @@
 			eqToken: null
 			// eqToken: 'DooyMDNDoyMDE3MzEwNjE0MjM6MTU2NTY5OTE5Mjg4NDow'
 		},
+		/**
+		 * 判断是否登录
+		 */
+		isLogin: function() {
+			return (!!this.globalData.eqToken);
+		},
+		/**
+		 * 判断是否绑定手机
+		 */
+		isBindPhone: function() {
+			return (!!this.globalData.userInfo.userPhone);
+		},
+		/**
+		 * 获取最新设备信息
+		 */
+		getDevices: function() {
+			var that = this;
+			uni.request({
+				url: that.globalData.baseUrl + 'devices/' + that.globalData.admin,
+				method: 'GET',
+				data: {},
+				success: res => {
+					const devices = res.data.data.equipmentList;
+					this.globalData.devices = devices;
+				},
+				fail: () => {},
+				complete: () => {}
+			});
+		},
 		methods: {
+			/**
+			 * 获取分类信息
+			 */
 			getCategory: function() {
 				var that = this;
 				uni.request({
@@ -32,20 +64,6 @@
 							map.set(v.cgId, v.cgName);
 						})
 						this.$options.globalData.category = map;
-					},
-					fail: () => {},
-					complete: () => {}
-				});
-			},
-			getDevices: function() {
-				var that = this;
-				uni.request({
-					url: that.$baseUrl + 'devices/' + that.$options.globalData.admin,
-					method: 'GET',
-					data: {},
-					success: res => {
-						const devices = res.data.data.equipmentList;
-						this.$options.globalData.devices = devices;
 					},
 					fail: () => {},
 					complete: () => {}
@@ -113,7 +131,7 @@
 
 			// 网络数据
 			this.getCategory();
-			this.getDevices();
+			this.$options.getDevices();
 
 		},
 		onHide: function() {

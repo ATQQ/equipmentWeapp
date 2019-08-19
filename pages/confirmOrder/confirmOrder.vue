@@ -65,7 +65,16 @@
 		},
 		methods: {
 			submitOrder: function() {
-				console.log("提交订单");
+				// console.log("提交订单");
+				// 如果还未选择天数
+				if(this.daysIndex===-1){
+					uni.showToast({
+						icon:'none',
+						title:'请选择预约的天数'
+					})
+					return;
+				}
+				
 				let that = this;
 				
 				uni.request({
@@ -81,14 +90,18 @@
 						res=res.data;
 						//刷新设备数据
 						that.device.amount-=that.eqCount;
+						getApp().$vm.$options.getDevices();
+						
 						uni.showToast({
 							title: '预约成功',
 							icon: 'success',
 							duration:2000,
 							complete: () => {
-								uni.navigateBack({
-									delta: 1
-								});
+								setTimeout(function(){
+									uni.navigateBack({
+										delta: 1
+									});
+								},2000)
 							}
 						});
 						
