@@ -35,47 +35,53 @@
 		 * 获取最新设备信息
 		 */
 		getDevices: function() {
-			var that = this;
-			uni.request({
-				url: that.globalData.baseUrl + 'devices/' + that.globalData.admin,
-				method: 'GET',
-				data: {},
-				success: res => {
-					const devices = res.data.data.equipmentList;
-					this.globalData.devices = devices;
-				},
-				fail: () => {},
-				complete: () => {}
-			});
+			return new Promise(resolve => {
+				uni.request({
+					url: this.globalData.baseUrl + 'devices/' + this.globalData.admin,
+					method: 'GET',
+					data: {},
+					success: res => {
+						const devices = res.data.data.equipmentList;
+						this.globalData.devices = devices;
+						console.log('getDevices')
+						resolve()
+					}
+				});
+			})
 		},
 		methods: {
 			/**
 			 * 获取分类信息
 			 */
 			getCategory: function() {
-				var that = this;
-				uni.request({
-					url: that.$baseUrl + 'categorys/' + that.$options.globalData.admin,
-					method: 'GET',
-					success: res => {
-						const categorys = res.data.data.category;
-						const map = new Map();
-						categorys.forEach((v) => {
-							map.set(v.cgId, v.cgName);
-						})
-						this.$options.globalData.category = map;
-					},
-					fail: () => {},
-					complete: () => {}
-				});
+				return new Promise(resolve => {
+					uni.request({
+						url: this.$baseUrl + 'categorys/' + this.$options.globalData.admin,
+						method: 'GET',
+						success: res => {
+							const categorys = res.data.data.category;
+							const map = new Map();
+							categorys.forEach((v) => {
+								map.set(v.cgId, v.cgName);
+							})
+							this.$options.globalData.category = map;
+							console.log('getCategory')
+							resolve();
+						}
+					});
+				})
 			}
 		},
-		onLaunch: function() {
+		onLaunch: async function() {
 			this.$options.globalData.baseUrl = this.$baseUrl;
 			console.log('App Launch')
+			// 网络数据
+			await this.getCategory();
 		},
-		onShow: function() {
+		onShow: async function() {
 			console.log('App Show')
+			await this.$options.getDevices();
+
 			// 测试数据
 			// 获取分类列表
 			const categorys = [{
@@ -97,7 +103,7 @@
 			categorys.forEach((v) => {
 				map.set(v.cgId, v.cgName);
 			})
-			this.$options.globalData.category = map;
+			// this.$options.globalData.category = map;
 
 			const devices = [{
 					eqId: 1,
@@ -126,12 +132,10 @@
 					eqDate: (new Date()) - 0
 				}
 			]
-			this.$options.globalData.devices = devices;
+			// this.$options.globalData.devices = devices;
 
 
-			// 网络数据
-			this.getCategory();
-			this.$options.getDevices();
+
 
 		},
 		onHide: function() {

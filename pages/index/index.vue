@@ -31,7 +31,7 @@
 		<view class="deviceArea">
 			<deviceItem class='deviceItem' v-for="(device,index) in devices" :key="index" :device="device"></deviceItem>
 		</view>
-		
+
 		<!-- 换一组 -->
 		<view class="changeGroup">
 			<text @click="changeDeviceGroup()">点击换一组</text>
@@ -54,9 +54,9 @@
 	export default {
 		data() {
 			return {
-				count:4,//首页展示设备个数
-				splitWords:'- 设备 -',
-				devices:[],
+				count: 4, //首页展示设备个数
+				splitWords: '- 设备 -',
+				devices: [],
 				title: "实验室设备预约系统",
 				imgs: [
 					"/static/img/p1.jpg",
@@ -88,8 +88,8 @@
 			}
 		},
 		methods: {
-			changeDeviceGroup:function(){
-				this.devices=this.getRandomDevice(this.count);
+			changeDeviceGroup: function() {
+				this.devices = this.getRandomDevice(this.count);
 			},
 			// 导航栏
 			redirect: function(e) {
@@ -126,40 +126,44 @@
 			 * 随机加载{count}个设备信息
 			 * @param {Number} count
 			 */
-			getRandomDevice:function(count){
-				let originDevices=[...getApp().globalData.devices];
-				originDevices=originDevices.shuffle();
-				return originDevices.length>=count?originDevices.slice(0,count):originDevices;
+			getRandomDevice: function(count) {
+				let originDevices = [...getApp().globalData.devices];
+				originDevices = originDevices.shuffle();
+				return originDevices.length >= count ? originDevices.slice(0, count) : originDevices;
 			}
 		},
 		components: {
 			deviceItem
 		},
-		onLoad:function(){
+		onLoad: function() {
 			// 加载设备列表
-			this.devices=this.getRandomDevice(this.count);
+			this.changeDeviceGroup()
 		}
+
 	}
 </script>
 
 <style lang="less" scoped>
-	.splitWords,.changeGroup{
+	.splitWords,
+	.changeGroup {
 		text-align: center;
 		font-size: 0.7rem;
 		color: #5e6265;
 	}
-	.changeGroup{
+
+	.changeGroup {
 		padding-bottom: 0.5rem;
 	}
-	
+
 	.deviceArea {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		
-		.deviceItem{
+
+		.deviceItem {
 			margin-top: 0.6rem;
 		}
+
 		padding-bottom: 1rem;
 	}
 
