@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 头部标签 -->
-		<van-tabs :active="active" @click="changeType" color="#1989fa">
+		<van-tabs sticky animated :active="active" @click="changeType" color="#1989fa">
 			<van-tab v-for="(category,index) in categorys" :title="category.name" :key="index"></van-tab>
 		</van-tabs>
 		<!-- 设备列表 -->

@@ -6,7 +6,9 @@
 			devices: null, //设备Array
 			admin: 'admin', //管理员账号
 			baseUrl: null, //服务器路径
-			detailId: -1,
+			detailId: -1,//设备详情页Id
+			orderDetailId:-1,//订单详情页id
+			orderList:[],//订单列表数据
 			userInfo: {
 				userProfession: "舞蹈",
 				userAcademy: "艺术院",
@@ -16,6 +18,7 @@
 				userNumber: "201731061423",
 				userPower: 0
 			},
+			orderStatus: [], //订单状态map
 			eqToken: null
 			// eqToken: 'DooyMDNDoyMDE3MzEwNjE0MjM6MTU2NTY5OTE5Mjg4NDow'
 		},
@@ -51,6 +54,18 @@
 		},
 		methods: {
 			/**
+			 * 获取订单状态Map
+			 */
+			getOrderStatus: function() {
+				this.$options.globalData.orderStatus = new Map([
+					[-2, "未通过"],
+					[-1, "预约中"],
+					[0, "待取"],
+					[1, "待归还"],
+					[2, "已归还"]
+				]);
+			},
+			/**
 			 * 获取分类信息
 			 */
 			getCategory: function() {
@@ -74,6 +89,7 @@
 		},
 		onLaunch: async function() {
 			this.$options.globalData.baseUrl = this.$baseUrl;
+			this.getOrderStatus();
 			console.log('App Launch')
 			// 网络数据
 			await this.getCategory();
@@ -81,62 +97,6 @@
 		onShow: async function() {
 			console.log('App Show')
 			await this.$options.getDevices();
-
-			// 测试数据
-			// 获取分类列表
-			const categorys = [{
-					cgId: 1,
-					cgName: "测试1"
-				},
-				{
-					cgId: 2,
-					cgName: "测试2"
-				}, {
-					cgId: 3,
-					cgName: "测试3"
-				}, {
-					cgId: 4,
-					cgName: "测试4"
-				}
-			]
-			const map = new Map();
-			categorys.forEach((v) => {
-				map.set(v.cgId, v.cgName);
-			})
-			// this.$options.globalData.category = map;
-
-			const devices = [{
-					eqId: 1,
-					eqName: "名称",
-					eqNumber: "ddffsfsf",
-					categoryId: 3,
-					images: '[]',
-					introduce: "dsda",
-					amount: 12,
-					loan: 3,
-					numberUse: 555,
-					eqAdmin: "admin",
-					eqDate: (new Date()) - 0
-				},
-				{
-					eqId: 2,
-					eqName: "名称2",
-					eqNumber: "ddfdfsfsf",
-					categoryId: 2,
-					images: '[]',
-					introduce: "dsssda",
-					amount: 15,
-					loan: 1,
-					numberUse: 222,
-					eqAdmin: "admin",
-					eqDate: (new Date()) - 0
-				}
-			]
-			// this.$options.globalData.devices = devices;
-
-
-
-
 		},
 		onHide: function() {
 			console.log('App Hide')

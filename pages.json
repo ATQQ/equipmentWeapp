@@ -9,6 +9,15 @@
 				"navigationBarTitleText": "SWPU实验室设备预约系统"
 			}
 		}, {
+			"path": "pages/record/record",
+			"style": {
+				"usingComponents": {
+					"van-tab": "/wxcomponents/vant/tab/index",
+					"van-tabs": "/wxcomponents/vant/tabs/index"
+				},
+				"enablePullDownRefresh":true
+			}
+		}, {
 			"path": "pages/confirmOrder/confirmOrder",
 			"style": {
 				"usingComponents": {
@@ -69,9 +78,6 @@
 				}
 			}
 		}, {
-			"path": "pages/record/record",
-			"style": {}
-		}, {
 			"path": "pages/mine/mine",
 			"style": {}
 		}, {
@@ -91,6 +97,21 @@
 			}
 		}
 
+		, {
+			"path": "pages/orderDetail/orderDetail",
+			"style": {
+				"usingComponents": {
+					"van-submit-bar": "/wxcomponents/vant/submit-bar/index",
+					"van-card": "/wxcomponents/vant/card/index",
+					"van-button": "/wxcomponents/vant/button/index",
+					"van-stepper": "/wxcomponents/vant/stepper/index",
+					"van-picker": "/wxcomponents/vant/picker/index",
+					"van-field": "/wxcomponents/vant/field/index",
+					"van-cell": "/wxcomponents/vant/cell/index",
+					"van-cell-group": "/wxcomponents/vant/cell-group/index"
+				}
+			}
+		}
 	],
 	"tabBar": {
 		"color": "#000",
@@ -121,7 +142,10 @@
 		"navigationBarBackgroundColor": "#1989fa",
 		"backgroundColor": "#f0f3f6",
 		"usingComponents": {
-			"van-toast": "/wxcomponents/vant/toast/index"
+			"van-toast": "/wxcomponents/vant/toast/index",
+			"van-card": "/wxcomponents/vant/card/index",
+			"van-button": "/wxcomponents/vant/button/index",
+			"van-tag": "/wxcomponents/vant/tag/index"
 		}
 	}
 }
