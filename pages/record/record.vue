@@ -10,7 +10,7 @@
 			<orderItem class="orderItem" v-for="(order,index) in OrderList" :order='order' :key="index"></orderItem>
 		</view>
 		
-		
+		<bottomText :text="bottomText" v-show="!IsEmpty"> </bottomText>
 		<!-- 空内容提示 -->
 		<view class="emptyTips" v-show="IsEmpty">
 			<text>空空如也,什么也没有哟,可尝试下拉获取最新数据</text>
@@ -20,7 +20,8 @@
 
 <script>
 	import {orderItem} from '../../components/orderItem.vue';
-	
+	import {bottomText} from '../../components/bottomText.vue'
+
 	export default {
 		data() {
 			return {
@@ -51,7 +52,8 @@
 						title:'未通过'
 					}
 				], //分类
-				orderList:[]
+				orderList:[],
+				bottomText:"下拉刷新"
 			};
 		},
 		methods:{
@@ -116,7 +118,8 @@
 			this.getOrderList();
 		},
 		components:{
-			orderItem
+			orderItem,
+			bottomText
 		}
 	}
 </script>

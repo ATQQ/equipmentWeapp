@@ -15,11 +15,11 @@
 			/**
 			 * 未登录
 			 */
-			if(!getApp().$vm.$options.isLogin()){
-				uni.redirectTo({
-					url: '../login/login'
-				});
-			}
+			// if(!getApp().$vm.$options.isLogin()){
+			// 	uni.redirectTo({
+			// 		url: '../login/login'
+			// 	});
+			// }
 		}
 	}
 </script>

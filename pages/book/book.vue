@@ -11,7 +11,7 @@
 		</view>
 
 		<!-- 页面底部文案 -->
-		<bottomText v-show='!loadFlag'></bottomText>
+		<bottomText v-show='!loadFlag' :text="bottomText"></bottomText>
 		<!-- 弹出提示框 -->
 		<van-toast id="van-toast" />
 	</scroll-view>
@@ -32,7 +32,8 @@
 				devices: [],
 				deviceHeight: '',
 				isEmpty: false,
-				loadFlag:true//判断是否该触发加载新的内容
+				loadFlag:true,//判断是否该触发加载新的内容
+				bottomText:"不妨告诉你,我是有底线的"
 			}
 		},
 		methods: {

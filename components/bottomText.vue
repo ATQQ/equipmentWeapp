@@ -3,7 +3,7 @@
 		<text class="line">
 		</text>
 		<text class="content">
-			不妨告诉你,我是有底线的
+			{{text}}
 		</text>
 		<text class="line">
 		</text>
@@ -17,6 +17,9 @@
 			return {
 				
 			};
+		},
+		props:{
+			text:String
 		}
 	}
 </script>
