@@ -1,8 +1,5 @@
 {
 	"pages": [{
-			"path": "pages/mine/mine",
-			"style": {}
-		}, {
 			"path": "pages/index/index",
 			"style": {
 				"usingComponents": {
@@ -12,13 +9,30 @@
 				"navigationBarTitleText": "SWPU实验室设备预约系统"
 			}
 		}, {
+			"path": "pages/personInfo/personInfo",
+			"style": {
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/icon/index"
+				},
+				"navigationBarTitleText":"个人资料"
+			}
+		}, {
+			"path": "pages/mine/mine",
+			"style": {
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/icon/index"
+				},
+				"navigationBarTitleText":"我的"
+			}
+		}, {
 			"path": "pages/record/record",
 			"style": {
 				"usingComponents": {
 					"van-tab": "/wxcomponents/vant/tab/index",
 					"van-tabs": "/wxcomponents/vant/tabs/index"
 				},
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText":"预约记录"
 			}
 		}, {
 			"path": "pages/confirmOrder/confirmOrder",
@@ -32,7 +46,8 @@
 					"van-field": "/wxcomponents/vant/field/index",
 					"van-cell": "/wxcomponents/vant/cell/index",
 					"van-cell-group": "/wxcomponents/vant/cell-group/index"
-				}
+				},
+				"navigationBarTitleText":"预约确认"
 			}
 		},
 
@@ -83,6 +98,7 @@
 		}, {
 			"path": "pages/book/book",
 			"style": {
+				"navigationBarTitleText": "预约设备",
 				"usingComponents": {
 					"van-toast": "/wxcomponents/vant/toast/index"
 				}
@@ -90,6 +106,7 @@
 		}, {
 			"path": "pages/type/type",
 			"style": {
+				"navigationBarTitleText": "分类查询",
 				"usingComponents": {
 					"van-tab": "/wxcomponents/vant/tab/index",
 					"van-tabs": "/wxcomponents/vant/tabs/index"
@@ -100,6 +117,7 @@
 		, {
 			"path": "pages/orderDetail/orderDetail",
 			"style": {
+				"navigationBarTitleText": "预约详情",
 				"usingComponents": {
 					"van-submit-bar": "/wxcomponents/vant/submit-bar/index",
 					"van-card": "/wxcomponents/vant/card/index",
@@ -112,6 +130,7 @@
 				}
 			}
 		}
+
 	],
 	"tabBar": {
 		"color": "#000",

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App'
 Vue.config.productionTip = false
 Vue.prototype.$baseUrl = "http://localhost:9000/equipmentServer/"
+
+// Vue.prototype.$baseUrl = "https://sugarat.top/equipmentServer/"
 App.mpType = 'app'
 
 /**

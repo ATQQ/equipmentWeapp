@@ -129,6 +129,8 @@
 							uni.switchTab({
 								url:'../index/index'
 							})
+						}else if(code===202){
+							Toast.fail('手机号已存在,请换个手机号试试');
 						}
 					},
 					fail: () => {},
